@@ -8,7 +8,7 @@ int check_isbn10(uint64_t isbn10) {
   if(isbn10 > maxValidISBN||isbn10 < 11){
   return 0;
   }
-
+//Test
   uint64_t isbn10Copy = isbn10;
 
   uint64_t mulArr[10] ={0,11, 110, 1100, 11000, 110000, 1100000, 11000000, 110000000, 1100000000};
