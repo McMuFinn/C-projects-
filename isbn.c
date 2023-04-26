@@ -18,7 +18,8 @@ int check_isbn10(uint64_t isbn10) {
   uint64_t ergebniss;
   uint64_t crossSum = 0;
   uint64_t currIndex = 7;
-  uint64_t subTotalFor
+  
+
   for(int i = 0; i < 10; i++){
         numDissected[i] = isbn10Copy % 10; //adds current ones to correct place in array
     	isbn10Copy/=10; //shifts subtotal over one decimal place
