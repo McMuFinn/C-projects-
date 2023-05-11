@@ -8,12 +8,15 @@ void* memmem(const void* haystack, size_t haystacklen,
   char* charHaystack = (char*)haystack;
   char* charNeedle = (char*)needle;
   uint8_t setFound = 0;
+  if(needlelen == 0){
+  return (void*)haystack;
+  }
   
   for(int32_t i = 0; i<haystacklen; i++){
     
   		if(charHaystack[i] == charNeedle[0]){
-          
-     		 	if((haystacklen-1-i) >= needlelen){ //CHECK IF ENOUGH POSSIBLE CHARACTERS LEFT IN STRING (Minus 1 because maxIndex is len-1)    				
+				setFound = 1;          
+     		 	if((haystacklen-i) >= needlelen){ //CHECK IF ENOUGH POSSIBLE CHARACTERS LEFT IN STRING     				
     					
                			for(int32_t j = 1; j<needlelen;j++){
         						setFound = 0;
@@ -25,11 +28,11 @@ void* memmem(const void* haystack, size_t haystacklen,
             							    	}	
                 	        }//closes for loop checking if rest of string matches 
          	  	  	if(setFound == 1){ // check how many zeroes in front 
-          						int32_t k = 0;
+          					/*	int32_t k = 0;
             							while((i-1)-k>=0 && charHaystack[(i-1)-k] == 0){ //First cond: checks if at beginning of string Second: checks if char == \0
             								k++;  
-              								}
-            							return (void*)(charHaystack+(i-k));
+              								}*/
+            							return (void*)(charHaystack+i);
             				} //closes setFound if statement
             				//Else do nothing (increment)
     		   
@@ -52,12 +55,16 @@ void* memmem(const void* haystack, size_t haystacklen,
 int main(int argc, char* argv[]){
 const void* haystack = "Hello world!";
 size_t haystacklen = 12;
-const void* needle = "world";
+const void* needle = "world!";
 size_t needlelen = 6;
 
 void* returnPtr = memmem(haystack, haystacklen, needle, needlelen);
+if(returnPtr == 0){
+printf("NULL");
+}else{
 char valueAtPtr = *((char*)returnPtr);
 printf("%c",valueAtPtr);
+}
 return 0;
 
 }
